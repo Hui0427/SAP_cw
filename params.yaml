@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    dataset_dir: "/home/xinyue/calibration_dataset"
+    pattern: "*.jpeg"
+    publish_rate_hz: 1.0
+    frame_id: "camera"
+    loop: true
