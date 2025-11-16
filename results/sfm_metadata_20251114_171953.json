@@ -1,0 +1,28 @@
+{
+  "timestamp": "20251114_171953",
+  "num_points": 470,
+  "num_poses": 37,
+  "num_images": 38,
+  "parameters": {
+    "nfeatures": 50,
+    "ransac_threshold": 1.0,
+    "ransac_probability": 0.999
+  },
+  "camera_intrinsics": [
+    [
+      800.0,
+      0.0,
+      320.0
+    ],
+    [
+      0.0,
+      800.0,
+      240.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ]
+}
