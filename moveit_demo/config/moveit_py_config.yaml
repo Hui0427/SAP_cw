@@ -1,0 +1,90 @@
+/**:
+  ros__parameters:
+    planning_scene_monitor_options:
+      name: "planning_scene_monitor"
+      robot_description: "robot_description"
+      joint_state_topic: "/joint_states"
+      attached_collision_object_topic: "/moveit_cpp/planning_scene_monitor"
+      publish_planning_scene_topic: "/moveit_cpp/publish_planning_scene"
+      monitored_planning_scene_topic: "/moveit_cpp/monitored_planning_scene"
+      wait_for_initial_state_timeout: 10.0
+
+    planning_pipelines:
+      pipeline_names: ["ompl", "pilz_industrial_motion_planner", "chomp"]
+
+    default_planning_pipeline: ompl
+
+    # OMPL planning plugin configuration
+    ompl:
+      planning_plugins: ["ompl_interface/OMPLPlanner"]
+      request_adapters:
+        - "default_planner_request_adapters/AddTimeOptimalParameterization"
+        - "default_planner_request_adapters/ResolveConstraintFrames"
+        - "default_planner_request_adapters/FixWorkspaceBounds"
+        - "default_planner_request_adapters/FixStartStateBounds"
+        - "default_planner_request_adapters/FixStartStateCollision"
+        - "default_planner_request_adapters/FixStartStatePathConstraints"
+      response_adapters:
+        - "default_planner_response_adapters/AddTimeOptimalParameterization"
+        - "default_planner_response_adapters/ValidateSolution"
+        - "default_planner_response_adapters/DisplayMotionPath"
+      planner_configs:
+        RRTConnectkConfigDefault:
+          type: geometric::RRTConnect
+          range: 0.0
+
+    # Pilz planning plugin configuration
+    pilz_industrial_motion_planner:
+      planning_plugins: ["pilz_industrial_motion_planner/CommandPlanner"]
+      request_adapters:
+        - "default_planning_request_adapters/ResolveConstraintFrames"
+        - "default_planning_request_adapters/ValidateWorkspaceBounds"
+        - "default_planning_request_adapters/CheckStartStateBounds"
+        - "default_planning_request_adapters/CheckStartStateCollision"
+
+    # CHOMP planning plugin configuration
+    chomp:
+      planning_plugins: ["chomp_interface/CHOMPPlanner"]
+      request_adapters:
+        - "default_planner_request_adapters/AddTimeOptimalParameterization"
+        - "default_planner_request_adapters/ResolveConstraintFrames"
+        - "default_planner_request_adapters/FixWorkspaceBounds"
+        - "default_planner_request_adapters/FixStartStateBounds"
+        - "default_planner_request_adapters/FixStartStateCollision"
+        - "default_planner_request_adapters/FixStartStatePathConstraints"
+      response_adapters:
+        - "default_planner_response_adapters/AddTimeOptimalParameterization"
+        - "default_planner_response_adapters/ValidateSolution"
+        - "default_planner_response_adapters/DisplayMotionPath"
+
+    plan_request_params:
+      planning_attempts: 1
+      planning_pipeline: ompl
+      max_velocity_scaling_factor: 0.3
+      max_acceleration_scaling_factor: 0.3
+
+    ompl_rrtc:
+      plan_request_params:
+        planning_attempts: 1
+        planning_pipeline: ompl
+        planner_id: "RRTConnectkConfigDefault"
+        max_velocity_scaling_factor: 0.3
+        max_acceleration_scaling_factor: 0.3
+        planning_time: 1.0
+
+    pilz_lin:
+      plan_request_params:
+        planning_attempts: 1
+        planning_pipeline: pilz_industrial_motion_planner
+        planner_id: "PTP"
+        max_velocity_scaling_factor: 0.3
+        max_acceleration_scaling_factor: 0.3
+        planning_time: 0.8
+
+    chomp_planner:
+      plan_request_params:
+        planning_attempts: 1
+        planning_pipeline: chomp
+        max_velocity_scaling_factor: 0.3
+        max_acceleration_scaling_factor: 0.3
+        planning_time: 1.5
