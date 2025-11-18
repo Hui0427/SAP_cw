@@ -263,3 +263,36 @@ This implementation covers all required aspects:
 * Integration with ROS2 and MoveIt2
 * Planning and execution of a complete manipulation pipeline
 * Final demonstration video with RViz + robot execution
+
+## Tested Environment
+
+All commands and experiments were executed **inside an Ubuntu virtual machine running on macOS (Apple Silicon)**.
+
+The project was tested with the following environment:
+
+- OS: Ubuntu 24.04.3 LTS (noble)
+- Kernel / Architecture: `Linux 6.8.0-87-generic`, `aarch64` (ARM64)
+- ROS 2: Jazzy (environment variables: `ROS_VERSION=2`, `ROS_DISTRO=jazzy`)
+- Python: 3.12.3
+- Build tool: `colcon` (used with `colcon build`, `colcon info`)
+
+You can quickly verify that your environment by running:
+
+```bash
+# OS version
+lsb_release -a
+
+# Kernel and architecture
+uname -a
+
+# Python version
+python3 --version
+
+# ROS 2 distro
+printenv | grep -E 'ROS_DISTRO|ROS_VERSION'
+
+# Check that the workspace packages are visible to colcon
+cd ~/ros2_ws
+colcon info
+
+
